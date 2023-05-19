@@ -29,6 +29,8 @@
 .poke-box {
   border: 2px solid black;
   border-radius: 5px;
-  margin-top: 5%;
   padding: 2.5%;
+  position: fixed;
+  top: 18%;
+  right: 5%;
 }

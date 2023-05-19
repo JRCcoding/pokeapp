@@ -4,9 +4,9 @@ import PokemonList from './components/PokemonList'
 function App() {
   return (
     <>
-      <nav className='header'>
+      <div className='header'>
         <h2>Pokémon App</h2>
-      </nav>
+      </div>
 
       <PokemonList />
     </>
