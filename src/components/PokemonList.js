@@ -34,23 +34,26 @@ const PokemonList = () => {
     fetchPokemon()
   }, [pokemonURL])
   return (
-    <div style={{ display: 'flex', flexDirection: 'row' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', marginTop: '5%' }}>
       <div>
-        <h3>Pokémon List</h3>
+        <h3 className='list-title'>Pokémon List</h3>
         {allPokemon &&
           allPokemon.map((pokemon) => (
             <div key={pokemon.name}>
-              <ul>
-                <li onClick={() => setPokemonURL(pokemon.url)}>
+              <ul className='list'>
+                <li
+                  onClick={() => setPokemonURL(pokemon.url)}
+                  className='list-item'
+                >
                   {pokemon.name}
                 </li>
               </ul>
             </div>
           ))}
       </div>
-      <div style={{ position: 'fixed', right: '0' }}>
+      <div style={{ position: 'fixed', right: '0' }} className='poke-box'>
         <h4>Selected Pokémon: </h4>
-        <img src={pokemon.sprites.front_default} alt={pokemon.name} />
+        <img src={pokemon?.sprites.front_default} alt={pokemon?.name} />
         <br />
         &nbsp;&nbsp;
         <strong>{pokemon?.name.toUpperCase()}</strong>
@@ -62,7 +65,6 @@ const PokemonList = () => {
             <li>{type.type.name.toUpperCase()}</li>
           </ul>
         ))}
-        <hr />
       </div>
     </div>
   )
