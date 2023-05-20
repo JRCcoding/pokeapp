@@ -75,6 +75,15 @@ const PokemonList = () => {
   }, [pokemonName])
 
   const randomSelection = () => Math.floor(Math.random() * 20)
+  const inputRef = useRef(false)
+
+  const [open, setOpen] = useState(false)
+  const toggleOpen = () => {
+    setOpen(!open)
+  }
+  useEffect(() => {
+    inputRef.current.focus()
+  }, [open])
 
   return (
     <div
@@ -88,15 +97,16 @@ const PokemonList = () => {
     >
       <Accordion>
         <AccordionSummary
-          // expandIcon={<SearchIcon />}
-          expandIcon={'V'}
-          // aria-controls='panel1a-content'
-          // id='panel1a-header'
+          expandIcon={'👇'}
+          aria-controls='panel1a-content'
+          id='panel1a-header'
+          onClick={toggleOpen}
         >
           SEARCH:
         </AccordionSummary>
         <AccordionDetails>
           <input
+            ref={inputRef}
             type='text'
             value={pokemonName}
             onChange={handleInputChange}
@@ -129,6 +139,7 @@ const PokemonList = () => {
         </button>
       </div>
       {pokemon?.types.map((type) => {
+        //////////     GRASS    TYPE    //////////
         if (type.type.name.includes('grass')) {
           return (
             <div className='poke-box grass'>
@@ -151,6 +162,7 @@ const PokemonList = () => {
               </div>
             </div>
           )
+          //////////     ELECTRIC    TYPE    //////////
         } else if (type.type.name.includes('electric')) {
           return (
             <div className='poke-box electric'>
@@ -167,37 +179,13 @@ const PokemonList = () => {
                 alt={pokemon.name}
                 className='poke-sprite'
               />
-              {/* {pokemon.moves.map((move) => {
-                // if (move.move.name === 'thunder-punch') {
-                //   return (
-                //     <div className='poke-move'>
-                //       <img
-                //         src={electric}
-                //         alt='electric'
-                //         className='poke-type-icon'
-                //       />
-                //       {move.move.name}
-                //     </div>
-                //   )
-                // } else if (move.move.name === 'thunder-shock') {
-                //   return (
-                //     <div className='poke-move'>
-                //       <img
-                //         src={electric}
-                //         alt='electric'
-                //         className='poke-type-icon'
-                //       />
-                //       {move.move.name}
-                //     </div>
-                //   )
-                // }
-              })} */}
               <div className='poke-move'>
                 <p> {pokemon?.moves[randomSelection()]?.move?.name}</p>
                 <p> {pokemon?.moves[randomSelection()]?.move?.name}</p>
               </div>
             </div>
           )
+          //////////     FIRE    TYPE    //////////
         } else if (type.type.name.includes('fire')) {
           return (
             <div className='poke-box fire'>
@@ -220,6 +208,7 @@ const PokemonList = () => {
               </div>
             </div>
           )
+          //////////     WATER    TYPE    //////////
         } else if (type.type.name.includes('water')) {
           return (
             <div className='poke-box water'>
@@ -242,6 +231,7 @@ const PokemonList = () => {
               </div>
             </div>
           )
+          //////////     FIGHTING    TYPE    //////////
         } else if (type.type.name.includes('fighting')) {
           return (
             <div className='poke-box fighting'>
