@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
+import electric from '../images/electric_icon.png'
+// import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import SearchIcon from '@mui/icons-material/Search'
+import { Accordion, AccordionSummary, AccordionDetails } from '@mui/material'
 
 const PokemonList = () => {
   const [pokemon, setPokemon] = useState()
@@ -68,18 +72,52 @@ const PokemonList = () => {
   }
   useEffect(() => {
     fetchPokemon()
-  }, [pokemonURL])
+  }, [pokemonName])
+
+  const randomSelection = () => Math.floor(Math.random() * 100)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', marginTop: '5%' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        marginTop: '10%',
+        width: '40%',
+        margin: '10% auto',
+      }}
+    >
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<SearchIcon />}
+          // aria-controls='panel1a-content'
+          // id='panel1a-header'
+        >
+          SEARCH:
+        </AccordionSummary>
+        <AccordionDetails>
+          <input
+            type='text'
+            value={pokemonName}
+            onChange={handleInputChange}
+            placeholder='Pikachu...'
+          />
+          {suggestions?.length > 0 && (
+            <ul className='list'>
+              {suggestions.map((suggestion) => (
+                <li
+                  key={suggestion}
+                  onClick={() => handleSuggestionClick(suggestion)}
+                  className='list-item'
+                >
+                  {suggestion}
+                </li>
+              ))}
+            </ul>
+          )}
+        </AccordionDetails>
+      </Accordion>
+
       <div>
-        <input
-          type='text'
-          value={pokemonName}
-          onChange={handleInputChange}
-          placeholder='Enter Pokémon name'
-          style={{ marginTop: '5%' }}
-        />
         <button
           onClick={searchPokemon}
           ref={searchButtonRef}
@@ -87,50 +125,130 @@ const PokemonList = () => {
         >
           Search
         </button>
-        {error && <p>{error}</p>}
-        {suggestions?.length > 0 && (
-          <ul className='list'>
-            {suggestions.map((suggestion) => (
-              <li
-                key={suggestion}
-                onClick={() => handleSuggestionClick(suggestion)}
-                className='list-item'
-              >
-                {suggestion}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
-      {pokemon ? (
-        <div className='poke-box'>
-          <strong className='poke-title'>{pokemon.name}</strong>
-          <img
-            src={pokemon.sprites.front_default}
-            alt={pokemon.name}
-            className='poke-sprite'
-          />
-          <h2>
-            {pokemon.stats.map((stat) => {
-              if (stat.stat.name === 'hp') {
-                return stat.base_stat
-              }
-            })}
-          </h2>
-          {/*
-                TO DISPLAY TYPES, USEFUL FOR REFERENCE LATER
-            <h6>Type(s):</h6>
-          {pokemon?.types.map((type) => (
-            <ul key={type.slot} style={{ listStyle: 'none' }}>
-              <li>{type.type.name.toUpperCase()}</li>
-            </ul>
-          ))} */}
-        </div>
-      ) : (
+      {pokemon?.types.map((type) => {
+        if (type.type.name.includes('grass')) {
+          return (
+            <div className='poke-box grass'>
+              <div className='poke-header'>
+                <strong>{pokemon.name}</strong>
+                <strong>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              <div className='poke-move'>
+                <p> {pokemon?.moves[randomSelection()]?.move?.name}</p>
+                <p> {pokemon?.moves[randomSelection()]?.move?.name}</p>
+              </div>
+            </div>
+          )
+        } else if (type.type.name.includes('electric')) {
+          return (
+            <div className='poke-box electric'>
+              <div className='poke-header'>
+                <strong>{pokemon.name}</strong>
+                <strong>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              {/* {pokemon.moves.map((move) => {
+                // if (move.move.name === 'thunder-punch') {
+                //   return (
+                //     <div className='poke-move'>
+                //       <img
+                //         src={electric}
+                //         alt='electric'
+                //         className='poke-type-icon'
+                //       />
+                //       {move.move.name}
+                //     </div>
+                //   )
+                // } else if (move.move.name === 'thunder-shock') {
+                //   return (
+                //     <div className='poke-move'>
+                //       <img
+                //         src={electric}
+                //         alt='electric'
+                //         className='poke-type-icon'
+                //       />
+                //       {move.move.name}
+                //     </div>
+                //   )
+                // }
+              })} */}
+              <div className='poke-move'>
+                <p> {pokemon?.moves[randomSelection()]?.move?.name}</p>
+                <p> {pokemon?.moves[randomSelection()]?.move?.name}</p>
+              </div>
+            </div>
+          )
+        } else if (type.type.name.includes('fire')) {
+          return (
+            <div className='poke-box fire'>
+              <div className='poke-header'>
+                <strong>{pokemon.name}</strong>
+                <strong>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              <div className='poke-move'>
+                <p> {pokemon.moves[randomSelection()].move.name}</p>
+                <p> {pokemon.moves[randomSelection()].move.name}</p>
+              </div>
+            </div>
+          )
+        } else if (type.type.name.includes('water')) {
+          return (
+            <div className='poke-box water'>
+              <div className='poke-header'>
+                <strong style={{ marginLeft: '20%' }}>{pokemon.name}</strong>
+                <strong>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              <div className='poke-move'>
+                <p> {pokemon.moves[randomSelection()].move.name}</p>
+                <p> {pokemon.moves[randomSelection()].move.name}</p>
+              </div>
+            </div>
+          )
+        }
+      })}
+      {/* {pokemon ? ( */}
+
+      {/* ) : (
         <div style={{ marginLeft: '10%', fontSize: '2rem' }}>
           Pick a Pokémon
         </div>
-      )}
+      )} */}
     </div>
   )
 }
