@@ -88,7 +88,8 @@ const PokemonList = () => {
     >
       <Accordion>
         <AccordionSummary
-          expandIcon={<SearchIcon />}
+          // expandIcon={<SearchIcon />}
+          expandIcon={'V'}
           // aria-controls='panel1a-content'
           // id='panel1a-header'
         >
@@ -100,6 +101,7 @@ const PokemonList = () => {
             value={pokemonName}
             onChange={handleInputChange}
             placeholder='Pikachu...'
+            style={{ width: '75%' }}
           />
           {suggestions?.length > 0 && (
             <ul className='list'>
