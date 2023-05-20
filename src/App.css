@@ -92,6 +92,12 @@ padding: 3.5px;
   background-repeat: no-repeat;
 
 }
+.fighting {
+  background-image: url(./images/fighting_type.png);
+  background-size: contain;  
+  background-repeat: no-repeat;
+
+}
 
 .poke-sprite {
   margin-top: -19%;

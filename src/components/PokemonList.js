@@ -74,7 +74,7 @@ const PokemonList = () => {
     fetchPokemon()
   }, [pokemonName])
 
-  const randomSelection = () => Math.floor(Math.random() * 100)
+  const randomSelection = () => Math.floor(Math.random() * 20)
 
   return (
     <div
@@ -224,7 +224,7 @@ const PokemonList = () => {
           return (
             <div className='poke-box water'>
               <div className='poke-header'>
-                <strong style={{ marginLeft: '20%' }}>{pokemon.name}</strong>
+                <strong>{pokemon.name}</strong>
                 <strong>
                   {pokemon.stats.map((stat) => {
                     if (stat.stat.name === 'hp') return stat.base_stat
@@ -237,8 +237,30 @@ const PokemonList = () => {
                 className='poke-sprite'
               />
               <div className='poke-move'>
-                <p> {pokemon.moves[randomSelection()].move.name}</p>
-                <p> {pokemon.moves[randomSelection()].move.name}</p>
+                <p> {pokemon.moves[randomSelection()].move?.name}</p>
+                <p> {pokemon.moves[randomSelection()].move?.name}</p>
+              </div>
+            </div>
+          )
+        } else if (type.type.name.includes('fighting')) {
+          return (
+            <div className='poke-box fighting'>
+              <div className='poke-header'>
+                <strong>{pokemon.name}</strong>
+                <strong>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              <div className='poke-move'>
+                <p> {pokemon?.moves[randomSelection()].move?.name}</p>
+                <p> {pokemon?.moves[randomSelection()].move?.name}</p>
               </div>
             </div>
           )
