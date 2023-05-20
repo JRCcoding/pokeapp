@@ -19,11 +19,11 @@
 }
 
 .list {
-
+  list-style: none;
 }
 
 .list-item {
-
+text-transform: capitalize;
 }
 
 .poke-box {
@@ -42,8 +42,9 @@
 .poke-title {
   margin-left: 3.25%;
   margin-top: -3.5%;
-  margin-bottom: -15%;
+  margin-bottom: -12%;
   font-size: .7rem;
+  text-transform: capitalize;
 }
 
 .poke-sprite {

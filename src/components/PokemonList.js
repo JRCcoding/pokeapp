@@ -80,16 +80,21 @@ const PokemonList = () => {
           placeholder='Enter Pokémon name'
           style={{ marginTop: '5%' }}
         />
-        <button onClick={searchPokemon} ref={searchButtonRef}>
+        <button
+          onClick={searchPokemon}
+          ref={searchButtonRef}
+          style={{ display: 'none' }}
+        >
           Search
         </button>
         {error && <p>{error}</p>}
         {suggestions?.length > 0 && (
-          <ul>
+          <ul className='list'>
             {suggestions.map((suggestion) => (
               <li
                 key={suggestion}
                 onClick={() => handleSuggestionClick(suggestion)}
+                className='list-item'
               >
                 {suggestion}
               </li>
@@ -99,14 +104,22 @@ const PokemonList = () => {
       </div>
       {pokemon ? (
         <div className='poke-box'>
-          <strong className='poke-title'>{pokemon.name.toUpperCase()}</strong>
+          <strong className='poke-title'>{pokemon.name}</strong>
           <img
             src={pokemon.sprites.front_default}
             alt={pokemon.name}
             className='poke-sprite'
           />
-
-          {/* <h6>Type(s):</h6>
+          <h2>
+            {pokemon.stats.map((stat) => {
+              if (stat.stat.name === 'hp') {
+                return stat.base_stat
+              }
+            })}
+          </h2>
+          {/*
+                TO DISPLAY TYPES, USEFUL FOR REFERENCE LATER
+            <h6>Type(s):</h6>
           {pokemon?.types.map((type) => (
             <ul key={type.slot} style={{ listStyle: 'none' }}>
               <li>{type.type.name.toUpperCase()}</li>
