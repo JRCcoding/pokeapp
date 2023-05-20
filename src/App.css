@@ -27,10 +27,25 @@
 }
 
 .poke-box {
-  border: 2px solid black;
-  border-radius: 5px;
   padding: 2.5%;
   position: fixed;
   top: 18%;
   right: 5%;
+  background-image: url(./images/grass_type.png);
+  background-size:contain;
+  width: 136px;
+  height: 202px;
+  display: flex;
+  flex-direction: column;
+}
+
+.poke-title {
+  margin-left: 3.25%;
+  margin-top: -3.5%;
+  margin-bottom: -15%;
+  font-size: .7rem;
+}
+
+.poke-sprite {
+  scale: 1.5;
 }

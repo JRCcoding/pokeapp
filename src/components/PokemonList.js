@@ -3,9 +3,7 @@ import axios from 'axios'
 
 const PokemonList = () => {
   const [pokemon, setPokemon] = useState()
-  const [pokemonURL, setPokemonURL] = useState(
-    'https://pokeapi.co/api/v2/pokemon/1'
-  )
+  const [pokemonURL, setPokemonURL] = useState()
   /////   for search
   const [pokemonName, setPokemonName] = useState('')
   const [error, setError] = useState(null)
@@ -16,7 +14,7 @@ const PokemonList = () => {
     if (pokemonName === '') {
       setSuggestions([])
     }
-  })
+  }, [])
 
   const searchPokemon = async () => {
     try {
@@ -27,7 +25,7 @@ const PokemonList = () => {
       setError(null)
     } catch (error) {
       setPokemon(null)
-      setError('Pokémanz not found!')
+      // setError('Pokémanz not found!')
     }
   }
   const fetchSuggestions = async (inputValue) => {
@@ -99,21 +97,27 @@ const PokemonList = () => {
           </ul>
         )}
       </div>
-      <div className='poke-box'>
-        <h4>Selected Pokémon:</h4>
-        <img src={pokemon?.sprites.front_default} alt={pokemon?.name} />
-        <br />
-        &nbsp;&nbsp;
-        <strong>{pokemon?.name.toUpperCase()}</strong>
-        <h6>Weight:</h6>
-        &nbsp;&nbsp;{pokemon?.weight}
-        <h6>Type(s):</h6>
-        {pokemon?.types.map((type) => (
-          <ul key={type.slot} style={{ listStyle: 'none' }}>
-            <li>{type.type.name.toUpperCase()}</li>
-          </ul>
-        ))}
-      </div>
+      {pokemon ? (
+        <div className='poke-box'>
+          <strong className='poke-title'>{pokemon.name.toUpperCase()}</strong>
+          <img
+            src={pokemon.sprites.front_default}
+            alt={pokemon.name}
+            className='poke-sprite'
+          />
+
+          {/* <h6>Type(s):</h6>
+          {pokemon?.types.map((type) => (
+            <ul key={type.slot} style={{ listStyle: 'none' }}>
+              <li>{type.type.name.toUpperCase()}</li>
+            </ul>
+          ))} */}
+        </div>
+      ) : (
+        <div style={{ marginLeft: '10%', fontSize: '2rem' }}>
+          Pick a Pokémon
+        </div>
+      )}
     </div>
   )
 }
