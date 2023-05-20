@@ -33,13 +33,13 @@ margin-top: 15%;
 
 .list-item {
 text-transform: capitalize;
-margin-left: -50%;
 font-size: .8rem;
 font-family: Pokemon;
 border: solid 2px black;
 border-radius: 5px;
 text-align: center;
 padding: 3.5px;
+width: 70%;
 }
 
 .poke-box {
@@ -94,6 +94,12 @@ padding: 3.5px;
 }
 .fighting {
   background-image: url(./images/fighting_type.png);
+  background-size: contain;  
+  background-repeat: no-repeat;
+
+}
+.fairy {
+  background-image: url(./images/fairy_type.png);
   background-size: contain;  
   background-repeat: no-repeat;
 

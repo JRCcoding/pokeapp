@@ -92,7 +92,7 @@ const PokemonList = () => {
         flexDirection: 'column',
         marginTop: '10%',
         width: '40%',
-        margin: '10% auto',
+        margin: '15% auto',
       }}
     >
       <Accordion>
@@ -238,6 +238,30 @@ const PokemonList = () => {
               <div className='poke-header'>
                 <strong>{pokemon.name}</strong>
                 <strong>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              <div className='poke-move'>
+                <p> {pokemon?.moves[randomSelection()].move?.name}</p>
+                <p> {pokemon?.moves[randomSelection()].move?.name}</p>
+              </div>
+            </div>
+          )
+        }
+        //////////     FIGHTING    TYPE    //////////
+        else if (type.type.name.includes('fairy')) {
+          return (
+            <div className='poke-box fairy'>
+              <div className='poke-header'>
+                <strong style={{ marginLeft: '15%' }}>{pokemon.name}</strong>
+                <strong style={{ marginLeft: '12%' }}>
                   {pokemon.stats.map((stat) => {
                     if (stat.stat.name === 'hp') return stat.base_stat
                   })}
