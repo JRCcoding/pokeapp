@@ -104,6 +104,12 @@ width: 70%;
   background-repeat: no-repeat;
 
 }
+.dragon {
+  background-image: url(./images/dragon_type.png);
+  background-size: contain;  
+  background-repeat: no-repeat;
+
+}
 
 .poke-sprite {
   margin-top: -19%;

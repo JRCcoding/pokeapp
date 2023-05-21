@@ -128,7 +128,6 @@ const PokemonList = () => {
           )}
         </AccordionDetails>
       </Accordion>
-
       <div>
         <button
           onClick={searchPokemon}
@@ -213,7 +212,7 @@ const PokemonList = () => {
           return (
             <div className='poke-box water'>
               <div className='poke-header'>
-                <strong>{pokemon.name}</strong>
+                <strong style={{ marginLeft: '15%' }}>{pokemon.name}</strong>
                 <strong>
                   {pokemon.stats.map((stat) => {
                     if (stat.stat.name === 'hp') return stat.base_stat
@@ -255,7 +254,7 @@ const PokemonList = () => {
             </div>
           )
         }
-        //////////     FIGHTING    TYPE    //////////
+        //////////     FAIRY    TYPE    //////////
         else if (type.type.name.includes('fairy')) {
           return (
             <div className='poke-box fairy'>
@@ -279,14 +278,33 @@ const PokemonList = () => {
             </div>
           )
         }
+        //////////     DRAGON    TYPE    //////////
+        else if (type.type.name.includes('dragon')) {
+          return (
+            <div className='poke-box dragon'>
+              <div className='poke-header'>
+                <strong style={{ marginLeft: '15%' }}>{pokemon.name}</strong>
+                <strong style={{ marginLeft: '12%' }}>
+                  {pokemon.stats.map((stat) => {
+                    if (stat.stat.name === 'hp') return stat.base_stat
+                  })}
+                </strong>
+              </div>
+              <img
+                src={pokemon.sprites.front_default}
+                alt={pokemon.name}
+                className='poke-sprite'
+              />
+              <div className='poke-move'>
+                <p> {pokemon?.moves[randomSelection()].move?.name}</p>
+                <p> {pokemon?.moves[randomSelection()].move?.name}</p>
+              </div>
+            </div>
+          )
+        }
       })}
-      {/* {pokemon ? ( */}
-
-      {/* ) : (
-        <div style={{ marginLeft: '10%', fontSize: '2rem' }}>
-          Pick a Pokémon
-        </div>
-      )} */}
+      <strong>Height: </strong>
+      <span>{pokemon?.height}</span>
     </div>
   )
 }
